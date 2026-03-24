@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Filler — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Form Filler Settings</h1>
+
+    <!-- Global Options -->
+    <section class="section">
+      <h2>Global Options</h2>
+      <label class="toggle-row">
+        <input type="checkbox" id="randomFallback" checked>
+        <span>Generate random values when no default or custom rule matches</span>
+      </label>
+    </section>
+
+    <!-- Field Type Defaults -->
+    <section class="section">
+      <h2>Field Type Defaults</h2>
+      <p class="hint">Set default values for each input type. Enable "JS" to evaluate the value as a JavaScript expression.</p>
+      <table id="typeDefaults">
+        <thead>
+          <tr>
+            <th class="col-enabled">Enabled</th>
+            <th class="col-type">Type</th>
+            <th class="col-value">Default Value</th>
+            <th class="col-expr">JS</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Custom Rules -->
+    <section class="section">
+      <h2>Custom Field Rules</h2>
+      <p class="hint">Rules are checked in order — first match wins. Use these to target specific fields by their attributes.</p>
+      <div id="customRules"></div>
+      <button id="addRule" class="btn btn-add">+ Add Rule</button>
+    </section>
+
+    <!-- Status -->
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

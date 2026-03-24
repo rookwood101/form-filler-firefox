@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Filler Test Page</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input, textarea, select { display: block; margin-top: 4px; padding: 6px; width: 100%; max-width: 400px; }
+    input[type="checkbox"], input[type="radio"] { display: inline; width: auto; }
+    fieldset { margin-top: 16px; padding: 12px; }
+    h2 { margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <h1>Form Filler Test Page</h1>
+
+  <form id="testForm">
+    <h2>Text Fields</h2>
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your full name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com">
+
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" placeholder="+1-555-000-0000">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password">
+
+    <label for="website">Website</label>
+    <input type="url" id="website" name="website" placeholder="https://...">
+
+    <label for="search">Search</label>
+    <input type="search" id="search" name="search" placeholder="Search...">
+
+    <h2>Number / Range</h2>
+
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" min="1" max="120">
+
+    <label for="satisfaction">Satisfaction (range)</label>
+    <input type="range" id="satisfaction" name="satisfaction" min="0" max="100">
+
+    <h2>Date / Time</h2>
+
+    <label for="birthday">Birthday</label>
+    <input type="date" id="birthday" name="birthday">
+
+    <label for="meeting-time">Meeting Time</label>
+    <input type="time" id="meeting-time" name="meeting_time">
+
+    <label for="month">Month</label>
+    <input type="month" id="month" name="month">
+
+    <label for="week">Week</label>
+    <input type="week" id="week" name="week">
+
+    <label for="datetime">Date & Time</label>
+    <input type="datetime-local" id="datetime" name="datetime">
+
+    <h2>Color</h2>
+
+    <label for="fav-color">Favorite Color</label>
+    <input type="color" id="fav-color" name="fav_color">
+
+    <h2>Textarea</h2>
+
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself"></textarea>
+
+    <h2>Select</h2>
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="">-- Select --</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+      <option value="de">Germany</option>
+    </select>
+
+    <h2>Checkboxes</h2>
+
+    <label><input type="checkbox" name="agree" id="agree"> I agree to terms and conditions</label>
+    <label><input type="checkbox" name="newsletter" id="newsletter"> Subscribe to newsletter</label>
+
+    <h2>Radio Buttons</h2>
+
+    <fieldset>
+      <legend>Gender</legend>
+      <label><input type="radio" name="gender" value="male"> Male</label>
+      <label><input type="radio" name="gender" value="female"> Female</label>
+      <label><input type="radio" name="gender" value="other"> Other</label>
+    </fieldset>
+
+    <h2>Fields with aria attributes</h2>
+
+    <span id="comment-label">Leave a comment</span>
+    <input type="text" aria-labelledby="comment-label" name="comment">
+
+    <input type="text" aria-label="Nickname" name="nickname">
+
+    <h2>Disabled / Readonly (should be skipped)</h2>
+
+    <label for="readonly-field">Readonly</label>
+    <input type="text" id="readonly-field" value="Cannot change" readonly>
+
+    <label for="disabled-field">Disabled</label>
+    <input type="text" id="disabled-field" value="Cannot change" disabled>
+
+    <h2>Hidden (should be skipped)</h2>
+    <input type="hidden" name="csrf_token" value="abc123">
+
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="results" style="margin-top: 20px; padding: 10px; background: #f0f0f0; display: none;">
+    <h3>Form Values</h3>
+    <pre id="form-values"></pre>
+  </div>
+
+  <script>
+    document.getElementById('testForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const values = {};
+      for (const [key, val] of formData.entries()) {
+        values[key] = val;
+      }
+      document.getElementById('form-values').textContent = JSON.stringify(values, null, 2);
+      document.getElementById('results').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
