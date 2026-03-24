@@ -44,7 +44,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -56,6 +56,14 @@ h1 {
 h2 {
   font-size: 18px;
   margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .section {
@@ -72,49 +80,151 @@ h2 {
   margin-bottom: 12px;
 }
 
+.hint code {
+  background: var(--bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
 /* Toggle Row */
 .toggle-row {
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  margin-bottom: 6px;
 }
 
-/* Field Type Defaults Table */
-table {
+.toggle-row:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Name-Based Defaults ──────────────────────────────────────────── */
+
+.name-defaults-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .name-defaults-groups {
+    grid-template-columns: 1fr;
+  }
+}
+
+.name-group {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.name-defaults-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
+.name-defaults-table th,
+.name-defaults-table td {
+  padding: 5px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.name-defaults-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.name-defaults-table .col-enabled { width: 32px; }
+.name-defaults-table .col-label { width: 110px; font-size: 13px; }
+.name-defaults-table .col-generator { }
+
+.gen-value-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.gen-select {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.gen-value-input {
+  width: 90px;
+  flex-shrink: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.gen-value-input::placeholder,
+.gen-select option:first-child {
+  color: var(--text-secondary);
+}
+
+/* ── Field Type Defaults Table ────────────────────────────────────── */
+
+table#typeDefaults {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#typeDefaults th, #typeDefaults td {
   padding: 8px 10px;
   text-align: left;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
-th {
+#typeDefaults th {
   font-size: 12px;
   text-transform: uppercase;
   color: var(--text-secondary);
   font-weight: 600;
 }
 
-.col-enabled { width: 70px; }
-.col-type { width: 130px; }
-.col-value { }
-.col-expr { width: 50px; text-align: center; }
+#typeDefaults .col-enabled { width: 60px; }
+#typeDefaults .col-type { width: 120px; }
+#typeDefaults .col-gen { width: 200px; }
+#typeDefaults .col-value { }
+#typeDefaults .col-expr { width: 40px; text-align: center; }
 
-td.col-type {
+#typeDefaults td.col-type {
   font-family: monospace;
   font-size: 13px;
 }
 
-td.col-expr {
+#typeDefaults td.col-expr {
   text-align: center;
 }
 
-td input[type="text"] {
+#typeDefaults td.col-gen select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+}
+
+#typeDefaults td input[type="text"] {
   width: 100%;
   padding: 6px 8px;
   border: 1px solid var(--border);
@@ -125,13 +235,15 @@ td input[type="text"] {
   font-family: monospace;
 }
 
-td input[type="text"]:focus {
+#typeDefaults td input[type="text"]:focus,
+#typeDefaults td.col-gen select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
 }
 
-/* Custom Rules */
+/* ── Custom Rules ─────────────────────────────────────────────────── */
+
 .rule-card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -207,6 +319,23 @@ td input[type="text"]:focus {
   margin-top: 10px;
 }
 
+.rule-value-row > label:first-child {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.rule-gen-select {
+  width: 180px;
+  flex-shrink: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+}
+
 .rule-value-row input[type="text"] {
   flex: 1;
   padding: 6px 8px;
@@ -218,13 +347,14 @@ td input[type="text"]:focus {
   font-family: monospace;
 }
 
-.rule-value-row input[type="text"]:focus {
+.rule-value-row input[type="text"]:focus,
+.rule-gen-select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
 }
 
-.rule-value-row label {
+.rule-value-row label:last-child {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -233,7 +363,99 @@ td input[type="text"]:focus {
   white-space: nowrap;
 }
 
-/* Buttons */
+/* ── Website Presets ──────────────────────────────────────────────── */
+
+.preset-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.preset-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.preset-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.preset-name-input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.preset-name-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.preset-url-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.preset-url-row label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.preset-url-input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.preset-url-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.preset-rules {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.preset-rules-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.preset-rules-container {
+  margin-bottom: 8px;
+}
+
+.preset-rules-container .rule-card {
+  background: var(--surface);
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────── */
+
 .btn {
   padding: 6px 14px;
   border: none;
@@ -283,7 +505,8 @@ td input[type="text"]:focus {
   color: var(--text);
 }
 
-/* Status */
+/* ── Status ───────────────────────────────────────────────────────── */
+
 .status {
   padding: 10px 14px;
   border-radius: var(--radius);

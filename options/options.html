@@ -14,20 +14,131 @@
       <h2>Global Options</h2>
       <label class="toggle-row">
         <input type="checkbox" id="randomFallback" checked>
-        <span>Generate random values when no default or custom rule matches</span>
+        <span>Generate random values when no default or rule matches</span>
       </label>
+      <label class="toggle-row">
+        <input type="checkbox" id="nameMatching" checked>
+        <span>Smart name-based matching (detect field purpose from name/id/label)</span>
+      </label>
+    </section>
+
+    <!-- Name-Based Defaults -->
+    <section class="section">
+      <h2>Name-Based Defaults</h2>
+      <p class="hint">When a field's name, id, label, or placeholder matches a common pattern, it will be filled using the configured generator or value. Disable a row to leave matching fields empty.</p>
+
+      <div class="name-defaults-groups">
+        <div class="name-group">
+          <h3>Personal</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsPersonal"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Address</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsAddress"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Phone</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsPhone"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Online</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsOnline"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Payment</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsPayment"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Identity</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsIdentity"></tbody>
+          </table>
+        </div>
+
+        <div class="name-group">
+          <h3>Other</h3>
+          <table class="name-defaults-table">
+            <thead>
+              <tr>
+                <th class="col-enabled">On</th>
+                <th class="col-label">Field</th>
+                <th class="col-generator">Generator / Value</th>
+              </tr>
+            </thead>
+            <tbody id="nameDefaultsOther"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- Field Type Defaults -->
     <section class="section">
       <h2>Field Type Defaults</h2>
-      <p class="hint">Set default values for each input type. Enable "JS" to evaluate the value as a JavaScript expression.</p>
+      <p class="hint">Fallback values for each input type when no name-based or custom rule matches. Use a generator or a static value. Enable "JS" to evaluate as JavaScript.</p>
       <table id="typeDefaults">
         <thead>
           <tr>
             <th class="col-enabled">Enabled</th>
             <th class="col-type">Type</th>
-            <th class="col-value">Default Value</th>
+            <th class="col-gen">Generator</th>
+            <th class="col-value">Value (overrides generator)</th>
             <th class="col-expr">JS</th>
           </tr>
         </thead>
@@ -38,9 +149,17 @@
     <!-- Custom Rules -->
     <section class="section">
       <h2>Custom Field Rules</h2>
-      <p class="hint">Rules are checked in order — first match wins. Use these to target specific fields by their attributes.</p>
+      <p class="hint">Rules are checked in order — first match wins. Use these to target specific fields by their attributes. Set action to "Skip" to leave a field empty.</p>
       <div id="customRules"></div>
       <button id="addRule" class="btn btn-add">+ Add Rule</button>
+    </section>
+
+    <!-- Website Presets -->
+    <section class="section">
+      <h2>Website Presets</h2>
+      <p class="hint">Create presets for specific websites. When the URL matches, preset rules are applied before custom rules. Use <code>*</code> as wildcard in URL patterns.</p>
+      <div id="presets"></div>
+      <button id="addPreset" class="btn btn-add">+ Add Preset</button>
     </section>
 
     <!-- Status -->
